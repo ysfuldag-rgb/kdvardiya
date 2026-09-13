@@ -17,7 +17,7 @@ button,select{font:inherit; cursor:pointer}.top{background:#17191d;color:white;p
 <div class="card"><div class="head"><h2>Personel / Vardiya</h2><span id="status" class="week">Plan hazır değil</span></div><div class="tablewrap"><table class="tbl" id="table"></table></div><div id="days" class="summary"></div></div>
 <aside class="card side">
 <section><div class="score"><div><h3>Plan skoru</h3><div class="week" id="scoreText">Henüz plan oluşturulmadı.</div></div><b id="score">—</b></div><div class="meter"><i id="meter"></i></div></section>
-<section><h3>Kurallar</h3><div id="rules"></div></section>
+<section><h3>Sert Kurallar</h3><div id="rules"></div></section>
 </aside></div>
 </main>
 <div class="modal" id="modal"><div class="sheet"><h3 id="mt"></h3><div class="sub" id="ms"></div><div class="opts">
@@ -27,145 +27,212 @@ button,select{font:inherit; cursor:pointer}.top{background:#17191d;color:white;p
 <button class="opt" id="clearCell" style="border-color:#f0b8b3;color:#b42318;background:#fff7f6">🗑️ Temizle</button></div>
 <div class="foot"><button class="btn primary" id="lock">🔒 İzni/Vardiyayı Sabitle</button><button class="btn" id="close">Kapat</button></div></div></div>
 <div class="toast" id="toast"></div>
+
 <script>
 const DAYS=["Pzt","Salı","Çarş","Perş","Cuma","Cmt","Paz"];
 const SHIFTS=["07:30","10:00","13:30","16:00"];
 const people=[
-{name:"Serap Özdemir",role:"Müdür",kind:"manager",quota:6},
-{name:"Yusuf Uludağ",role:"Şef",kind:"manager",quota:6,shipment:true},
-{name:"Mehmet Koyun",role:"Şef",kind:"manager",quota:6},
-{name:"Dilara Salim",role:"Barista",kind:"barista",quota:6},
-{name:"Bayram Buran",role:"Barista",kind:"barista",quota:6,shipment:true},
-{name:"Emre Egeli",role:"Barista",kind:"barista",quota:6,shipment:true},
-{name:"Esmanur Demirtaş",role:"Barista",kind:"barista",quota:6},
-{name:"Fatma Kaçar",role:"Barista",kind:"barista",quota:6},
-{name:"Sude Naz Kırmazer",role:"Barista",kind:"barista",quota:6},
-{name:"Reyyan Can",role:"Barista",kind:"morning",quota:6},
-{name:"Yasemin Ertuna",role:"Kasacı",kind:"cashier",quota:6},
-{name:"Naide Utku",role:"Temizlik",kind:"cleaning",quota:6},
-{name:"Part-time",role:"Barista",kind:"barista",quota:4}
+    {name:"Serap Özdemir", role:"Müdür", kind:"manager", quota:6},
+    {name:"Yusuf Uludağ", role:"Şef", kind:"manager", quota:6, shipment:true},
+    {name:"Mehmet Koyun", role:"Şef", kind:"manager", quota:6},
+    {name:"Dilara Salim", role:"Barista", kind:"barista", quota:6},
+    {name:"Bayram Buran", role:"Barista", kind:"barista", quota:6, shipment:true},
+    {name:"Emre Egeli", role:"Barista", kind:"barista", quota:6, shipment:true},
+    {name:"Esmanur Demirtaş", role:"Barista", kind:"barista", quota:6},
+    {name:"Fatma Kaçar", role:"Barista", kind:"barista", quota:6},
+    {name:"Sude Naz Kırmazer", role:"Barista", kind:"barista", quota:6},
+    {name:"Reyyan Can", role:"Barista", kind:"morning", quota:6},
+    {name:"Yasemin Ertuna", role:"Kasacı", kind:"cashier", quota:6},
+    {name:"Naide Utku", role:"Temizlik", kind:"cleaning", quota:6},
+    {name:"Part-time", role:"Barista", kind:"barista", quota:4}
 ];
 
-let plan=Array.from({length:people.length},()=>Array(7).fill(""));
-let locked=Array.from({length:people.length},()=>Array(7).fill(false));
-let active=null;
+let plan = Array.from({length:people.length}, ()=>Array(7).fill(""));
+let locked = Array.from({length:people.length}, ()=>Array(7).fill(false));
+let active = null;
 
-function isWork(v){return SHIFTS.includes(v);}
-function isOff(v){return v==="İZİN"||v==="GELMEYECEK";}
+// Başlangıçta Yusuf için Salı gününe sabit izin eklendi.
+plan[1][1] = "İZİN";
+locked[1][1] = true;
+
+function isWork(v){ return SHIFTS.includes(v); }
+function isOff(v){ return v==="İZİN" || v==="GELMEYECEK"; }
 
 function render(){
     let h="<thead><tr><th class='who'>PERSONEL</th>"+DAYS.map((d,i)=>`<th>${d}${i===3||i===5?'<span class=ship>SEVKİYAT GÜNÜ</span>':''}</th>`).join("")+"</tr></thead><tbody>";
     people.forEach((p,i)=>{
         h+=`<tr><td class=who><span class=name>${p.name}</span><span class=role>${p.role}</span></td>`;
         for(let d=0;d<7;d++){
-            let v=plan[i][d],cl=v==="İZİN"?"leave":v==="GELMEYECEK"?"off":isWork(v)?"work":"";
+            let v=plan[i][d], cl=v==="İZİN"?"leave":v==="GELMEYECEK"?"off":isWork(v)?"work":"";
             h+=`<td><button class="cell ${cl} ${locked[i][d]?"locked":""}" onclick="openCell(${i},${d})">${v||"—"}${locked[i][d]?" 🔒":""}</button></td>`;
         }
         h+="</tr>";
     });
     h+="</tbody>";
-    document.getElementById("table").innerHTML=h;
+    document.getElementById("table").innerHTML = h;
     updateStatus();
 }
 
 function updateStatus(){
     let errors=[];
-    for(let d=0;d<7;d++){
-        let m=0,c=0,mid=0;
-        for(let i=0;i<people.length;i++){
-            if(plan[i][d]==="07:30") m++;
-            if(plan[i][d]==="16:00" && people[i].kind!=="cleaning") c++;
+    for(let d=0; d<7; d++){
+        let m=0, c=0, mid=0;
+        let hasManagerMorning=false, hasManagerClose=false;
+        for(let i=0; i<people.length; i++){
+            if(plan[i][d]==="07:30") {
+                m++;
+                if(people[i].kind==="manager") hasManagerMorning = true;
+            }
+            if(plan[i][d]==="16:00" && people[i].kind!=="cleaning") {
+                c++;
+                if(people[i].kind==="manager") hasManagerClose = true;
+            }
             if(plan[i][d]==="13:30") mid++;
         }
         if(m!==4) errors.push(`${DAYS[d]} sabah 4 kişi olmalı (${m}/4)`);
-        if(c!==4) errors.push(`${DAYS[d]} kapanış 4 operasyon olmalı (${c}/4)`);
+        if(c!==4) errors.push(`${DAYS[d]} kapanış 4 operasyon personeli olmalı (${c}/4)`);
+        if(!hasManagerMorning && m>0) errors.push(`${DAYS[d]} sabah yönetici yok.`);
+        if(!hasManagerClose && c>0) errors.push(`${DAYS[d]} kapanışta yönetici yok.`);
     }
     
-    for(let i=0;i<people.length;i++){
+    for(let i=0; i<people.length; i++){
         let w=plan[i].filter(isWork).length;
-        if(w!==people[i].quota) errors.push(`${people[i].name} ${w}/${people[i].quota} gün çalışıyor.`);
-        for(let d=0;d<6;d++){
-            if(plan[i][d]==="16:00" && isWork(plan[i][d+1])) errors.push(`${people[i].name} kapanıştan sonra ertesi gün çalışıyor.`);
+        if(w>0 && w!==people[i].quota) errors.push(`${people[i].name} haftalık kotası hatalı (${w}/${people[i].quota}).`);
+        for(let d=0; d<6; d++){
+            if(plan[i][d]==="16:00" && plan[i][d+1]==="07:30") {
+                errors.push(`${people[i].name} kapanıştan hemen sonra sabaha yazılmış.`);
+            }
         }
     }
 
-    let score = Math.max(0, 100 - (errors.length * 5));
-    document.getElementById("score").textContent = score;
+    let isBlank = plan.every(row => row.every(cell => !isWork(cell)));
+    let score = isBlank ? 0 : Math.max(0, 100 - (errors.length * 5));
+    document.getElementById("score").textContent = isBlank ? "—" : score;
     document.getElementById("meter").style.width = score + "%";
-    document.getElementById("status").textContent = errors.length ? "⚠ Hatalar var" : "✓ Kusursuz Plan";
-    document.getElementById("scoreText").textContent = errors.length ? errors[0] : "Tüm kurallar sağlandı.";
+    
+    if(isBlank) {
+        document.getElementById("status").textContent = "Plan hazır değil";
+        document.getElementById("scoreText").textContent = "Lütfen planı oluşturun.";
+    } else {
+        document.getElementById("status").textContent = errors.length ? "⚠ Hatalar var" : "✓ Kusursuz Plan";
+        document.getElementById("scoreText").textContent = errors.length ? errors[0] : "Tüm sert kurallar eksiksiz sağlandı.";
+    }
     
     let checks=[
-        ["Kota Kontrolü (6 ve 4 gün)", !errors.some(e=>e.includes("gün çalışıyor"))],
-        ["Kapanış -> Sabah Yasağı", !errors.some(e=>e.includes("kapanıştan sonra"))],
-        ["Günlük 4 Sabah, 4 Kapanış", !errors.some(e=>e.includes("olmalı"))]
+        ["Tam Kota (6 ve 4 gün)", !isBlank && !errors.some(e=>e.includes("kotası hatalı"))],
+        ["Kapanış → Sabah Yasağı", !isBlank && !errors.some(e=>e.includes("hemen sonra sabaha"))],
+        ["Günlük 4 Sabah, 4 Kapanış", !isBlank && !errors.some(e=>e.includes("olmalı"))],
+        ["Yönetici Garantisi", !isBlank && !errors.some(e=>e.includes("yönetici yok"))]
     ];
     document.getElementById("rules").innerHTML = checks.map(x=>`<div class=rule><span class=${x[1]?"ok":"bad"}>${x[1]?"✓":"✕"}</span>${x[0]}</div>`).join("");
 }
 
 function openCell(i,d){active={i,d};document.getElementById("mt").textContent=people[i].name+" · "+DAYS[d];document.getElementById("ms").textContent=people[i].role;document.getElementById("modal").classList.add("show");}
 function closeModal(){document.getElementById("modal").classList.remove("show");}
-document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(b.id==="clearCell")return; if(locked[active.i][active.d]){toast("Hücre kilitli!");return;} plan[active.i][active.d]=b.dataset.v;closeModal();render();});
-document.getElementById("clearCell").onclick=()=>{if(locked[active.i][active.d]){toast("Hücre kilitli!");return;} plan[active.i][active.d]="";closeModal();render();};
-document.getElementById("lock").onclick=()=>{locked[active.i][active.d]=!locked[active.i][active.d];closeModal();render();toast(locked[active.i][active.d]?"Hücre sabitlendi.":"Kilit kaldırıldı.");};
+document.querySelectorAll(".opt").forEach(b=>{
+    b.onclick=()=>{
+        if(b.id==="clearCell") return;
+        if(locked[active.i][active.d]){ toast("Hücre kilitli! Önce kilidi kaldırın."); return; }
+        plan[active.i][active.d] = b.dataset.v;
+        closeModal(); render();
+    };
+});
+document.getElementById("clearCell").onclick=()=>{
+    if(locked[active.i][active.d]){ toast("Hücre kilitli! Önce kilidi kaldırın."); return; }
+    plan[active.i][active.d] = "";
+    closeModal(); render();
+};
+document.getElementById("lock").onclick=()=>{
+    locked[active.i][active.d] = !locked[active.i][active.d];
+    closeModal(); render();
+    toast(locked[active.i][active.d]?"Hücre sabitlendi.":"Kilit kaldırıldı.");
+};
 document.getElementById("close").onclick=closeModal;
-document.getElementById("reset").onclick=()=>{plan=Array.from({length:people.length},()=>Array(7).fill(""));locked=Array.from({length:people.length},()=>Array(7).fill(false));render();toast("Sıfırlandı.");};
-document.getElementById("copy").onclick=()=>{let s="SHIFT PLAN\n"+DAYS.join("\t")+"\n";people.forEach((p,i)=>s+=p.name+"\t"+plan[i].join("\t")+"\n");navigator.clipboard?.writeText(s);toast("Kopyalandı.");};
-function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2500);}
+document.getElementById("reset").onclick=()=>{
+    plan=Array.from({length:people.length},()=>Array(7).fill(""));
+    locked=Array.from({length:people.length},()=>Array(7).fill(false));
+    render(); toast("Sıfırlandı.");
+};
+document.getElementById("copy").onclick=()=>{
+    let s="SHIFT PLAN\n"+DAYS.join("\t")+"\n";
+    people.forEach((p,i)=>s+=p.name+"\t"+plan[i].join("\t")+"\n");
+    navigator.clipboard?.writeText(s); toast("Plan kopyalandı.");
+};
+function toast(t){let x=document.getElementById("toast"); x.textContent=t; x.classList.add("show"); setTimeout(()=>x.classList.remove("show"),2500);}
 
-// AKILLI ÇÖZÜCÜ (JAVASCRIPT YAPAY ZEKA) - RANDOMIZED BACKTRACKING
+// AKILLI ÇÖZÜCÜ (JAVASCRIPT MONTE CARLO YAKLAŞIMI)
 document.getElementById("opt").onclick = () => {
     toast("⏳ Zeka motoru planı hesaplıyor...");
+    
     setTimeout(() => {
         let bestPlan = null;
         let bestScore = -9999;
         
-        // 500 kere farklı ihtimalleri rastgele deneyerek en iyisini bul (Monte Carlo)
-        for(let attempt=0; attempt<500; attempt++){
+        // 3000 ihtimali saniyenin onda biri hızında dene
+        for(let attempt=0; attempt<3000; attempt++){
             let tempPlan = plan.map(row => row.slice());
-            
-            // Kilitli ve manuel atamaları koru, diğerlerini sil
+            let valid = true;
+
+            // Kilitli ve manuel atamaları koru, diğerlerini temizle
             for(let i=0; i<people.length; i++){
                 for(let d=0; d<7; d++){
-                    if(!locked[i][d] && !isOff(tempPlan[i][d])) tempPlan[i][d]="";
+                    if(!locked[i][d] && !isOff(tempPlan[i][d])){
+                        tempPlan[i][d] = "";
+                    }
                 }
             }
 
-            let valid = true;
-            // Günleri tek tek doldur
+            // 1. AŞAMA: NAİDE'Yİ YERLEŞTİR (Sadece 16:00, Toplam 6 Gün)
+            let naideIndex = 11;
+            let naideWorkDays = tempPlan[naideIndex].filter(isWork).length;
+            let days = [0,1,2,3,4,5,6].sort(()=>Math.random()-0.5);
+            for(let d of days){
+                if(naideWorkDays >= 6) break;
+                if(tempPlan[naideIndex][d] === "" && !isOff(tempPlan[naideIndex][d])){
+                    tempPlan[naideIndex][d] = "16:00";
+                    naideWorkDays++;
+                }
+            }
+            if(naideWorkDays < 6) continue; // Naide tamamlanamadıysa atla
+
+            // 2. AŞAMA: OPERATÖRLERİ YERLEŞTİR (Toplam 70 Yuva = Kalan 12 kişinin tam kotası)
             for(let d=0; d<7; d++){
-                // O gün atanması gereken yuvalar
-                let slots = ["07:30","07:30","07:30","07:30", "13:30", "16:00","16:00","16:00","16:00","16:00", "10:00"];
+                // Operatör yuvaları: 4 Sabah, 1 Esnek(10:00), 1 Ara(13:30), 4 Kapanış
+                let slots = ["07:30","07:30","07:30","07:30", "10:00", "13:30", "16:00","16:00","16:00","16:00"];
                 
                 // Zaten kilitli olanlarla yuvaları düş
                 for(let i=0; i<people.length; i++){
-                    if(isWork(tempPlan[i][d])){
-                        let idx = slots.indexOf(tempPlan[i][d]);
+                    if(i === naideIndex) continue;
+                    let val = tempPlan[i][d];
+                    if(isWork(val)){
+                        let idx = slots.indexOf(val);
                         if(idx > -1) slots.splice(idx, 1);
                     }
                 }
 
-                // Kalan yuvalar için uygun kişileri bul
+                // Yuvaları karıştır
+                slots.sort(() => Math.random() - 0.5);
+
+                // Yuvaları doldur
                 for(let slot of slots){
                     let candidates = [];
                     for(let i=0; i<people.length; i++){
-                        if(tempPlan[i][d]!=="") continue; // Zaten o gün çalışıyor/izinli
-                        if(tempPlan[i].filter(isWork).length >= people[i].quota) continue; // Kotası dolmuş
-                        if(d>0 && tempPlan[i][d-1]==="16:00") continue; // Kapanıştan sonra sabah yasak!
+                        if(i === naideIndex) continue;
+                        if(tempPlan[i][d] !== "") continue; 
+                        if(tempPlan[i].filter(isWork).length >= people[i].quota) continue; // Kota doldu mu?
+                        if(d>0 && tempPlan[i][d-1] === "16:00" && slot === "07:30") continue; // Kapanış->Sabah Yasak!
                         
-                        // Yetkinlik kontrolleri
-                        if(people[i].kind==="cleaning" && slot!=="16:00") continue; // Naide sadece kapanış
-                        if(people[i].kind==="morning" && slot!=="07:30") continue; // Reyyan sadece sabah
-                        if(people[i].kind==="cashier" && (slot==="10:00" || slot==="13:30")) continue; // Kasa sadece sabah/kapanış
+                        // Rol Kısıtlamaları
+                        if(people[i].kind === "morning" && slot !== "07:30") continue; // Reyyan sadece sabah
+                        if(people[i].kind === "cashier" && (slot === "10:00" || slot === "13:30")) continue; // Kasa ara vardiyaya giremez
                         
                         candidates.push(i);
                     }
 
                     if(candidates.length === 0){
-                        valid = false; break; // Adam kalmadı, bu ihtimal patladı
+                        valid = false; break; // Adam kalmadı, bu senaryo iptal
                     }
                     
-                    // Rastgele birini seç
                     let chosen = candidates[Math.floor(Math.random() * candidates.length)];
                     tempPlan[chosen][d] = slot;
                 }
@@ -173,11 +240,30 @@ document.getElementById("opt").onclick = () => {
             }
 
             if(valid){
-                // Puanlama yap (Yönetici dengesi vb. varsa puanla)
+                // SERT KURAL KONTROLÜ: Yönetici Dengesi
+                let managersOk = true;
+                for(let d=0; d<7; d++){
+                    let hasMgM = false, hasMgC = false;
+                    for(let i=0; i<people.length; i++){
+                        if(people[i].kind === "manager"){
+                            if(tempPlan[i][d] === "07:30") hasMgM = true;
+                            if(tempPlan[i][d] === "16:00") hasMgC = true;
+                        }
+                    }
+                    if(!hasMgM || !hasMgC){ managersOk = false; break; }
+                }
+                if(!managersOk) continue; // Yöneticiler dengesizse iptal et
+
+                // YUMUŞAK KURAL (SKORLAMA) AŞAMASI
                 let score = 0;
-                // Örneğin kotasını tam dolduramayanlar eksi puan alır
                 for(let i=0; i<people.length; i++){
-                    if(tempPlan[i].filter(isWork).length === people[i].quota) score += 10;
+                    for(let d=0; d<6; d++){
+                        if(tempPlan[i][d] === "16:00" && tempPlan[i][d+1] === "16:00") score -= 5; // Peş peşe kapanışa ceza
+                    }
+                    if(people[i].shipment){
+                        if(tempPlan[i][3]==="10:00" || tempPlan[i][3]==="13:30") score += 10; // Perşembe sevkiyatçı
+                        if(tempPlan[i][5]==="10:00" || tempPlan[i][5]==="13:30") score += 10; // Cumartesi sevkiyatçı
+                    }
                 }
                 
                 if(score > bestScore){
@@ -190,11 +276,11 @@ document.getElementById("opt").onclick = () => {
         if(bestPlan){
             plan = bestPlan;
             render();
-            toast("✓ Kusursuz plan bulundu!");
+            toast("✓ Kusursuz plan saniyeler içinde bulundu!");
         } else {
-            toast("⚠ Bu izinlerle geçerli plan kurulamadı. Lütfen kilitleri veya izinleri esnetin.");
+            toast("⚠ Bu sabit izinlerle geçerli plan kurulamadı. İzinleri esnetin.");
         }
-    }, 100); // 100ms UI bekletmesi
+    }, 50); // Tarayıcı UI'sinin kilitlenmemesi için çok küçük bir bekleme (50ms)
 };
 
 render();
