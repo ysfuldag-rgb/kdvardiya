@@ -8,7 +8,6 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,sans-serif}
 button,select{font:inherit; cursor:pointer}.top{background:#17191d;color:white;position:sticky;top:0;z-index:30}.topin{max-width:1500px;margin:auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{display:flex;gap:10px;align-items:center}.logo{width:38px;height:38px;border-radius:11px;background:white;color:#17191d;display:grid;place-items:center;font-weight:900}.brand b{font-size:15px}.brand small{display:block;color:#aab1ba;font-size:10px}.actions{display:flex;gap:7px}.btn{border:1px solid #3a4047;background:#282d33;color:white;border-radius:10px;padding:9px 12px;font-weight:750}.btn.primary{background:white;color:#17191d;border-color:white}.wrap{max-width:1500px;margin:auto;padding:15px}.toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}.week{font-size:13px;color:var(--muted)}.grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}.head{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.head h2{font-size:14px;margin:0}.tablewrap{overflow:auto; -webkit-overflow-scrolling: touch;}.tbl{border-collapse:separate;border-spacing:0;width:100%;min-width:1050px}.tbl th,.tbl td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:6px}.tbl th{height:43px;background:#fafbfc;font-size:10px;text-transform:uppercase;letter-spacing:.5px;position:sticky;top:0;z-index:4}.tbl th:first-child{left:0;z-index:7}.tbl td:first-child{position:sticky;left:0;background:#fff;z-index:3}.who{min-width:118px;width:118px}.name{font-size:11px;font-weight:850;white-space:nowrap}.role{display:block;color:var(--muted);font-size:8px;margin-top:1px;white-space:nowrap}.cell{width:100%;height:52px;border:1px solid transparent;border-radius:10px;background:#f5f6f7;font-size:10px;font-weight:850;line-height:1.15}.cell.work{background:var(--greenbg);color:#145b41}.cell.leave{background:var(--redbg);color:var(--red)}.cell.off{background:#f0f1f3;color:#777e87}.cell.locked{box-shadow:inset 0 0 0 2px #17191d}.ship{font-size:8px;color:var(--amber);display:block;margin-top:2px}.summary{padding:10px;display:flex;gap:5px;flex-wrap:wrap}.pill{background:#f2f3f5;border-radius:99px;padding:5px 8px;font-size:9px}.side section{padding:14px;border-bottom:1px solid var(--line)}.side h3{margin:0 0 9px;font-size:13px}.score{display:flex;align-items:end;justify-content:space-between}.score b{font-size:30px}.meter{height:7px;background:#e6e8eb;border-radius:9px;margin-top:7px;overflow:hidden}.meter i{display:block;height:100%;background:var(--green);width:0}.rule{font-size:10px;padding:7px 0;border-bottom:1px solid #eef0f2;display:flex;gap:7px}.ok{color:var(--green)}.bad{color:var(--red)}.modal{display:none;position:fixed;inset:0;background:#10131899;z-index:50;align-items:end;justify-content:center}.modal.show{display:flex}.sheet{width:min(560px,100%);background:#fff;border-radius:20px 20px 0 0;padding:16px;max-height:90vh;overflow:auto}.sheet h3{margin:0 0 2px}.sub{color:var(--muted);font-size:10px}.opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:14px 0}.opt{border:1px solid var(--line);background:#fafbfc;border-radius:11px;padding:12px;text-align:left;font-weight:800}.foot{display:flex;gap:7px}.foot>*{flex:1}.toast{position:fixed;left:50%;bottom:18px;transform:translate(-50%,15px);opacity:0;background:#17191d;color:#fff;border-radius:11px;padding:9px 13px;font-size:10px;z-index:80;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
 
-/* MOBİL TASARIM KODLARI (GERİ EKLENDİ VE İYİLEŞTİRİLDİ) */
 @media(max-width:900px){
  .grid{grid-template-columns:1fr}.side{order:2}.wrap{padding:8px}
  .toolbar{align-items:stretch;flex-direction:column}.actions .btn{font-size:10px}
@@ -22,7 +21,7 @@ button,select{font:inherit; cursor:pointer}.top{background:#17191d;color:white;p
  .name{font-size:9px; white-space:normal; line-height:1.2;}.role{font-size:7px}.tbl{min-width:650px}
  .tbl th,.tbl td{padding:3px}.tbl th{font-size:8px;height:36px}.cell{height:40px;font-size:8px; padding:2px;}
  .summary{padding:7px}.pill{font-size:8px;padding:4px 6px}
- .opts{grid-template-columns:1fr;} /* Telefonda modal butonlarını alt alta sıralar */
+ .opts{grid-template-columns:1fr;} 
 }
 </style>
 </head>
@@ -72,7 +71,7 @@ function isWork(v){ return SHIFTS.includes(v); }
 function isOff(v){ return v==="İZİN" || v==="GELMEYECEK"; }
 
 function render(){
-    let h="<thead><tr><th class='who'>PERSONEL</th>"+DAYS.map((d,i)=>`<th>${d}${i===3||i===5?'<span class=ship>SEVKİYAT</span>':''}</th>`).join("")+"</tr></thead><tbody>";
+    let h="<thead><tr><th class='who'>PERSONEL</th>"+DAYS.map((d,i)=>`<th>${d}${i===3||i===5?'<span class=ship>SEVKİYAT GÜNÜ</span>':''}</th>`).join("")+"</tr></thead><tbody>";
     people.forEach((p,i)=>{
         h+=`<tr><td class=who><span class=name>${p.name}</span><span class=role>${p.role}</span></td>`;
         for(let d=0;d<7;d++){
@@ -103,7 +102,7 @@ function updateStatus(){
             if(plan[i][d]==="13:30") mid++;
         }
         if(m!==4) errors.push(`${DAYS[d]} sabah 4 kişi olmalı (${m}/4)`);
-        if(c!==4) errors.push(`${DAYS[d]} kapanış 4 operasyon personeli olmalı (${c}/4)`);
+        if(c < 4) errors.push(`${DAYS[d]} kapanış en az 4 operasyon personeli olmalı (${c}/4)`);
         if(!hasManagerMorning && m>0) errors.push(`${DAYS[d]} sabah yönetici yok.`);
         if(!hasManagerClose && c>0) errors.push(`${DAYS[d]} kapanışta yönetici yok.`);
     }
@@ -134,7 +133,7 @@ function updateStatus(){
     let checks=[
         ["Tam Kota (6 ve 4 gün)", !isBlank && !errors.some(e=>e.includes("kotası hatalı"))],
         ["Kapanış → Sabah Yasağı", !isBlank && !errors.some(e=>e.includes("hemen sonra sabaha"))],
-        ["Günlük 4 Sabah, 4 Kapanış", !isBlank && !errors.some(e=>e.includes("olmalı"))],
+        ["Günlük 4 Sabah, Min 4 Kapanış", !isBlank && !errors.some(e=>e.includes("olmalı"))],
         ["Yönetici Garantisi", !isBlank && !errors.some(e=>e.includes("yönetici yok"))]
     ];
     document.getElementById("rules").innerHTML = checks.map(x=>`<div class=rule><span class=${x[1]?"ok":"bad"}>${x[1]?"✓":"✕"}</span>${x[0]}</div>`).join("");
@@ -173,7 +172,7 @@ document.getElementById("copy").onclick=()=>{
 };
 function toast(t){let x=document.getElementById("toast"); x.textContent=t; x.classList.add("show"); setTimeout(()=>x.classList.remove("show"),2500);}
 
-// AKILLI ÇÖZÜCÜ - ESNEK TASLAK MOTORU
+// AKILLI ÇÖZÜCÜ - ESNEK KAPANIŞ VE İSTİKRAR MOTORU
 document.getElementById("opt").onclick = () => {
     toast("⏳ Zeka motoru en iyi taslağı hesaplıyor...");
 
@@ -185,12 +184,14 @@ document.getElementById("opt").onclick = () => {
             let tempPlan = plan.map(row => row.slice());
             let score = 10000; 
 
+            // Kilitleri ve manuel izinleri koru
             for(let i=0; i<people.length; i++){
                 for(let d=0; d<7; d++){
                     if(!locked[i][d] && !isOff(tempPlan[i][d])) tempPlan[i][d] = "";
                 }
             }
 
+            // 1. Naide'yi Yerleştir (Minimum 6 gün Kapanış)
             let naideIndex = 11;
             let naideWork = tempPlan[naideIndex].filter(isWork).length;
             let days = [0,1,2,3,4,5,6].sort(()=>Math.random()-0.5);
@@ -202,8 +203,19 @@ document.getElementById("opt").onclick = () => {
                 }
             }
 
+            // 2. Kotaları Dağıt (Sabah kesin 4, Kapanış esnek)
             for(let d=0; d<7; d++){
-                let slots = ["07:30","07:30","07:30","07:30", "10:00", "13:30", "16:00","16:00","16:00","16:00"];
+                // Temel zorunlu yuvalar (4 Sabah, 1 Ara, 4 Kapanış)
+                let slots = ["07:30","07:30","07:30","07:30", "13:30", "16:00","16:00","16:00","16:00"];
+                
+                // 10:00 vardiyasını sadece sevkiyat günleri (Perşembe-3, Cumartesi-5) aç, diğer günlere ekstra Kapanış ver
+                if(d === 3 || d === 5) {
+                    slots.push("10:00"); 
+                } else {
+                    slots.push("16:00"); 
+                }
+
+                // Kilitli olanları düş
                 for(let i=0; i<people.length; i++){
                     if(i === naideIndex) continue;
                     if(isWork(tempPlan[i][d])){
@@ -221,9 +233,15 @@ document.getElementById("opt").onclick = () => {
                         if(tempPlan[i].filter(isWork).length >= people[i].quota) continue; 
 
                         let penalty = 0;
-                        if(d>0 && tempPlan[i][d-1] === "16:00" && slot === "07:30") penalty += 2000;
-                        if(people[i].kind === "morning" && slot !== "07:30") penalty += 2000;
-                        if(people[i].kind === "cashier" && (slot === "10:00" || slot === "13:30")) penalty += 2000;
+                        
+                        // SERT VE YUMUŞAK GEÇİŞ KURALLARI
+                        if(d>0 && tempPlan[i][d-1] === "16:00" && slot === "07:30") penalty += 5000; // Kapanış->Sabah YASAK
+                        if(d>1 && isOff(tempPlan[i][d-1]) && tempPlan[i][d-2] === "07:30" && slot === "16:00") penalty += 2000; // Sabah->İzin->Kapanış CEZA
+                        if(d>1 && isOff(tempPlan[i][d-1]) && tempPlan[i][d-2] === "16:00" && slot === "07:30") penalty += 2000; // Kapanış->İzin->Sabah CEZA
+
+                        // ROL KISITLAMALARI
+                        if(people[i].kind === "morning" && slot !== "07:30") penalty += 5000;
+                        if(people[i].kind === "cashier" && (slot === "10:00" || slot === "13:30")) penalty += 5000;
 
                         candidates.push({id: i, penalty: penalty});
                     }
@@ -242,6 +260,22 @@ document.getElementById("opt").onclick = () => {
                 }
             }
 
+            // 3. Eksik Kalan Kotaları Kapanışa Yedir (Kapanış Minimum 4 Kuralı)
+            for(let i=0; i<people.length; i++){
+                let w = tempPlan[i].filter(isWork).length;
+                while(w < people[i].quota){
+                    let availableDays = [0,1,2,3,4,5,6].filter(day => tempPlan[i][day] === "" && !isOff(tempPlan[i][day]));
+                    if(availableDays.length > 0) {
+                        let targetDay = availableDays[Math.floor(Math.random() * availableDays.length)];
+                        tempPlan[i][targetDay] = "16:00"; 
+                        w++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+
+            // 4. Yönetici Kontrolü
             for(let d=0; d<7; d++){
                 let mgM = false, mgC = false;
                 for(let i=0; i<people.length; i++){
@@ -253,10 +287,6 @@ document.getElementById("opt").onclick = () => {
                 if(!mgM) score -= 500;
                 if(!mgC) score -= 500;
             }
-            for(let i=0; i<people.length; i++){
-                let w = tempPlan[i].filter(isWork).length;
-                if(w < people[i].quota) score -= (people[i].quota - w) * 1000;
-            }
 
             if(score > bestScore){
                 bestScore = score;
@@ -267,7 +297,7 @@ document.getElementById("opt").onclick = () => {
         if(bestPlan){
             plan = bestPlan;
             render();
-            toast("✓ Taslak plan oluşturuldu. Kırmızı uyarı veren yerleri tıklayarak düzeltebilirsiniz.");
+            toast("✓ Yeni kurallara göre taslak plan oluşturuldu.");
         }
     }, 50);
 };
