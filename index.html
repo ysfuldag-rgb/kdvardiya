@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ShiftFlow — Akıllı Vardiya Planlayıcı</title>
 <style>
-:root{--bg:#f4f6f8;--card:#fff;--ink:#15171a;--muted:#707782;--line:#e4e7eb;--green:#176b4b;--greenbg:#eaf6f0;--red:#b42318;--redbg:#fff0ee;--blue:#245bd6;--dark:#17191d;--shadow:0 8px 30px #1018280d}
-*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:82px}button{font:inherit;cursor:pointer}.top{background:var(--dark);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 14px #0002}.topin{max-width:760px;margin:auto;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px}.brand{display:flex;gap:9px;align-items:center}.logo{width:38px;height:38px;border-radius:11px;background:#fff;color:var(--dark);display:grid;place-items:center;font-weight:950}.brand b{font-size:15px;display:block}.brand small{display:block;color:#aeb4bc;font-size:9px;margin-top:1px}.actions{display:flex;gap:6px}.btn{border:1px solid #3b4148;background:#282d33;color:#fff;border-radius:11px;padding:9px 12px;font-weight:850}.primary{background:#fff;color:#17191d;border-color:#fff}.ghost{background:#f5f6f7;color:#24272b;border-color:var(--line);font-size:11px;padding:8px 10px}.wrap{width:min(100%,760px);margin:auto;padding:10px 10px 24px;display:grid;gap:10px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:var(--shadow)}.hero{padding:16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.eyebrow{font-size:9px;font-weight:900;letter-spacing:.08em;color:var(--green)}h1{font-size:22px;margin:3px 0 3px;letter-spacing:-.03em}.hero p{margin:0;color:var(--muted);font-size:11px;line-height:1.45;max-width:430px}.heroBadge{background:var(--greenbg);color:var(--green);border-radius:99px;padding:7px 9px;font-size:9px;font-weight:900;white-space:nowrap}.head{padding:13px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px}.head b{font-size:13px}.head small{display:block;color:var(--muted);font-size:9px;margin-top:2px}.peopleGrid{display:grid;gap:7px;padding:9px}.person{border:1px solid var(--line);border-radius:14px;padding:10px;background:#fff}.personTop{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.personName{font-size:11px;font-weight:900}.personRole{font-size:8px;color:var(--muted);margin-top:2px}.personTag{font-size:8px;color:var(--muted);background:#f3f4f6;padding:5px 7px;border-radius:99px}.dayRow{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.dayBtn{border:1px solid var(--line);background:#f7f8f9;border-radius:9px;padding:7px 2px 6px;font-size:8px;font-weight:850;color:#555}.dayBtn b{display:block;font-size:8px;margin-bottom:3px}.dayBtn.selected{background:var(--redbg);color:var(--red);border-color:#e7a49d;box-shadow:inset 0 0 0 1px #e7a49d}.dayBtn.disabled{opacity:.5}.resultCard{min-height:120px}.planView{padding:10px;display:grid;gap:7px}.planView.empty{padding:28px 15px;text-align:center;color:var(--muted);font-size:11px}.planView.empty span{display:block;font-size:9px;margin-top:3px}.planPerson{border:1px solid var(--line);border-radius:14px;overflow:hidden}.planPersonHead{padding:9px 10px;background:#fafbfc;display:flex;justify-content:space-between;align-items:center}.planPersonHead b{font-size:10px}.planPersonHead small{font-size:8px;color:var(--muted)}.shiftRow{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:7px}.shiftCell{min-height:42px;border-radius:8px;background:#f2f3f5;display:grid;place-items:center;text-align:center;font-size:7px;font-weight:900}.shiftCell.work{background:var(--greenbg);color:#145b41}.shiftCell.leave{background:var(--redbg);color:var(--red)}.shiftCell.ten{background:#fff7e6;color:#8a5a00}.shiftCell small{display:block;font-size:7px;color:inherit;opacity:.7;margin-top:1px}.summary{padding:9px;display:flex;gap:5px;overflow:auto}.pill{background:#f1f3f5;border-radius:99px;padding:6px 8px;font-size:8px;white-space:nowrap}.rulesCard #rules{padding:4px 13px 10px}.rule{font-size:10px;padding:7px 0;border-bottom:1px solid #eef0f2;line-height:1.35}.ok{color:var(--green)}.bottomAction{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:#fffddf0;border-top:1px solid var(--line);backdrop-filter:blur(12px)}.big{width:min(100%,740px);display:block;margin:auto;padding:12px 14px;border-radius:13px;font-size:13px}.toast{position:fixed;left:50%;bottom:74px;transform:translate(-50%,15px);opacity:0;background:#17191d;color:#fff;border-radius:11px;padding:9px 13px;font-size:10px;z-index:80;transition:.2s;max-width:92%;text-align:center}.toast.show{opacity:1}.bad{color:var(--red)}
+:root{--bg:#f4f6f8;--card:#fff;--ink:#15171a;--muted:#707782;--line:#e4e7eb;--green:#176b4b;--greenbg:#eaf6f0;--red:#b42318;--redbg:#fff0ee;--blue:#0052cc;--bluebg:#e8f4fd;--dark:#17191d;--shadow:0 8px 30px #1018280d}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:82px}button{font:inherit;cursor:pointer}.top{background:var(--dark);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 14px #0002}.topin{max-width:760px;margin:auto;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px}.brand{display:flex;gap:9px;align-items:center}.logo{width:38px;height:38px;border-radius:11px;background:#fff;color:var(--dark);display:grid;place-items:center;font-weight:950}.brand b{font-size:15px;display:block}.brand small{display:block;color:#aeb4bc;font-size:9px;margin-top:1px}.actions{display:flex;gap:6px}.btn{border:1px solid #3b4148;background:#282d33;color:#fff;border-radius:11px;padding:9px 12px;font-weight:850}.primary{background:#fff;color:#17191d;border-color:#fff}.ghost{background:#f5f6f7;color:#24272b;border-color:var(--line);font-size:11px;padding:8px 10px}.wrap{width:min(100%,760px);margin:auto;padding:10px 10px 24px;display:grid;gap:10px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;overflow:hidden;box-shadow:var(--shadow)}.hero{padding:16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.eyebrow{font-size:9px;font-weight:900;letter-spacing:.08em;color:var(--green)}h1{font-size:22px;margin:3px 0 3px;letter-spacing:-.03em}.hero p{margin:0;color:var(--muted);font-size:11px;line-height:1.45;max-width:430px}.heroBadge{background:var(--greenbg);color:var(--green);border-radius:99px;padding:7px 9px;font-size:9px;font-weight:900;white-space:nowrap}.head{padding:13px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px}.head b{font-size:13px}.head small{display:block;color:var(--muted);font-size:9px;margin-top:2px}.peopleGrid{display:grid;gap:7px;padding:9px}.person{border:1px solid var(--line);border-radius:14px;padding:10px;background:#fff}.personTop{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.personName{font-size:11px;font-weight:900}.personRole{font-size:8px;color:var(--muted);margin-top:2px}.personTag{font-size:8px;color:var(--muted);background:#f3f4f6;padding:5px 7px;border-radius:99px}.dayRow{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.dayBtn{border:1px solid var(--line);background:#f7f8f9;border-radius:9px;padding:7px 2px 6px;font-size:8px;font-weight:850;color:#555}.dayBtn b{display:block;font-size:8px;margin-bottom:3px}.dayBtn.selected{background:var(--redbg);color:var(--red);border-color:#e7a49d;box-shadow:inset 0 0 0 1px #e7a49d}.dayBtn.annual{background:var(--bluebg);color:var(--blue);border-color:#b3d4ff;box-shadow:inset 0 0 0 1px #b3d4ff}.dayBtn.disabled{opacity:.5}.resultCard{min-height:120px}.planView{padding:10px;display:grid;gap:7px}.planView.empty{padding:28px 15px;text-align:center;color:var(--muted);font-size:11px}.planView.empty span{display:block;font-size:9px;margin-top:3px}.planPerson{border:1px solid var(--line);border-radius:14px;overflow:hidden}.planPersonHead{padding:9px 10px;background:#fafbfc;display:flex;justify-content:space-between;align-items:center}.planPersonHead b{font-size:10px}.planPersonHead small{font-size:8px;color:var(--muted)}.shiftRow{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:7px}.shiftCell{min-height:42px;border-radius:8px;background:#f2f3f5;display:grid;place-items:center;text-align:center;font-size:7px;font-weight:900}.shiftCell.work{background:var(--greenbg);color:#145b41}.shiftCell.leave{background:var(--redbg);color:var(--red)}.shiftCell.annualCell{background:var(--bluebg);color:var(--blue)}.shiftCell.ten{background:#fff7e6;color:#8a5a00}.shiftCell small{display:block;font-size:7px;color:inherit;opacity:.7;margin-top:1px}.summary{padding:9px;display:flex;gap:5px;overflow:auto}.pill{background:#f1f3f5;border-radius:99px;padding:6px 8px;font-size:8px;white-space:nowrap}.rulesCard #rules{padding:4px 13px 10px}.rule{font-size:10px;padding:7px 0;border-bottom:1px solid #eef0f2;line-height:1.35}.ok{color:var(--green)}.bottomAction{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:#fffddf0;border-top:1px solid var(--line);backdrop-filter:blur(12px)}.big{width:min(100%,740px);display:block;margin:auto;padding:12px 14px;border-radius:13px;font-size:13px}.toast{position:fixed;left:50%;bottom:74px;transform:translate(-50%,15px);opacity:0;background:#17191d;color:#fff;border-radius:11px;padding:9px 13px;font-size:10px;z-index:80;transition:.2s;max-width:92%;text-align:center}.toast.show{opacity:1}.bad{color:var(--red)}
 @media(min-width:700px){.peopleGrid{grid-template-columns:1fr 1fr}.planView{grid-template-columns:1fr 1fr}.hero{padding:20px}.wrap{padding-top:14px}.dayBtn{font-size:9px}}
 </style>
 </head>
@@ -14,7 +14,7 @@
 <header class="top"><div class="topin"><div class="brand"><div class="logo">SF</div><div><b>ShiftFlow</b><small>İzinleri gir · vardiyaları sistem çözsün</small></div></div><button class="btn primary" id="make">⚡ Planı Oluştur</button></div></header>
 <main class="wrap">
   <section class="hero card"><div><span class="eyebrow">OTOMATİK PLANLAMA</span><h1>Önce izinleri gir.</h1><p>Vardiyalara dokunma. ShiftFlow geri kalanını kurallara göre otomatik oluşturur.</p></div><div class="heroBadge" id="status">İzinleri bekliyor</div></section>
-  <section class="card inputCard"><div class="head"><div><b>İzinler</b><small>Her çalışan için 1 gün seç</small></div><button class="btn ghost" id="clear">Temizle</button></div><div id="peopleGrid" class="peopleGrid"></div></section>
+  <section class="card inputCard"><div class="head"><div><b>İzinler ve Raporlar</b><small>Hücreye tıklayarak Normal İzin (Kırmızı) veya Yıllık İzin (Mavi) seçebilirsin.</small></div><button class="btn ghost" id="clear">Temizle</button></div><div id="peopleGrid" class="peopleGrid"></div></section>
   <section class="card resultCard"><div class="head"><div><b>Haftalık plan</b><small id="resultSub">Plan oluşturulunca burada görünecek</small></div></div><div id="planView" class="planView empty">⚡ <b>Plan henüz oluşturulmadı</b><span>İzinleri seçip “Planı Oluştur”a bas.</span></div><div id="days" class="summary"></div></section>
   <section class="card rulesCard"><div class="head"><b>Otomatik kurallar</b></div><div id="rules"></div></section>
 </main>
@@ -22,7 +22,7 @@
 <div class="toast" id="toast"></div>
 <script>
 const DAYS=["Pzt","Salı","Çarş","Perş","Cuma","Cmt","Paz"];
-const S={M:"07:30",TEN:"10:00",MID:"13:30",C:"16:00",L:"İZİN"};
+const S={M:"07:30",TEN:"10:00",MID:"13:30",C:"16:00",L:"İZİN",Y:"YILLIK"};
 const people=[
 {name:"Serap Özdemir",role:"Müdür",kind:"manager",quota:6},
 {name:"Yusuf Uludağ",role:"Şef",kind:"manager",quota:6,ship:true},
@@ -39,93 +39,155 @@ const people=[
 {name:"Part-time",role:"Barista",kind:"barista",quota:4}
 ];
 
-let leaves=people.map(()=>Array(7).fill(false));
+let leaves=people.map(()=>Array(7).fill(""));
 let plan=people.map(()=>Array(7).fill(""));
 let locked=people.map(()=>Array(7).fill(false));
 let generated=false; let activeQuota=people.map(x=>x.quota);
+
 function isWork(v){return [S.M,S.TEN,S.MID,S.C].includes(v)}
 function count(p,i){return p[i].filter(isWork).length}
 function daily(p,d,s){return p.reduce((n,r)=>n+(r[d]===s?1:0),0)}
 function managerOn(p,d,s){return people.some((x,i)=>x.kind==="manager"&&p[i][d]===s)}
-function leaveAt(i){for(let d=0;d<7;d++)if(leaves[i][d])return d;return null}
+function leaveAt(i){for(let d=0;d<7;d++)if(leaves[i][d]==="L")return d;return null}
+
 function cycleCells(i){
  const leave=leaveAt(i); if(leave===null)return [];
  return [[(leave+5)%7,S.MID],[(leave+6)%7,S.M],[leave,S.L],[(leave+1)%7,S.C]];
 }
 function isCycleEligible(i){return !["manager","morning","cleaning"].includes(people[i].kind) && i!==12}
-function resetLeaves(){leaves=people.map(()=>Array(7).fill(false));generated=false;buildLockedBase();render();}
+
+function resetLeaves(){leaves=people.map(()=>Array(7).fill(""));generated=false;buildLockedBase();render();}
+
 function buildLockedBase(){
  plan=people.map(()=>Array(7).fill(""));
  locked=people.map(()=>Array(7).fill(false));
- // Exactly one leave per regular employee; PT gets its leave selected automatically by solver.
+ 
  for(let i=0;i<people.length;i++){
-  const ld=leaveAt(i);
-  if(ld!==null){plan[i][ld]=S.L;locked[i][ld]=true}
+  for(let d=0;d<7;d++){
+   if(leaves[i][d] === "L") { plan[i][d] = S.L; locked[i][d] = true; }
+   if(leaves[i][d] === "Y") { plan[i][d] = S.Y; locked[i][d] = true; }
+  }
  }
- // Mandatory cycle for non-managers / non-Reyyan / non-Naide / non-PT.
+ 
  for(let i=0;i<people.length;i++)if(isCycleEligible(i)){
   for(const [d,v] of cycleCells(i)){plan[i][d]=v;locked[i][d]=true}
  }
- // Reyyan: every working day morning.
- const ri=people.findIndex(x=>x.name==="Reyyan Can"); const rl=leaveAt(ri);
- if(ri>=0)for(let d=0;d<7;d++)if(d!==rl){plan[ri][d]=S.M;locked[ri][d]=true}
- // Naide: every working day closing.
- const ni=people.findIndex(x=>x.name==="Naide Utku"); const nl=leaveAt(ni);
- if(ni>=0)for(let d=0;d<7;d++)if(d!==nl){plan[ni][d]=S.C;locked[ni][d]=true}
+ 
+ const ri=9,rl=leaveAt(ri); 
+ if(ri>=0)for(let d=0;d<7;d++)if(d!==rl && leaves[ri][d]!=="Y"){plan[ri][d]=S.M;locked[ri][d]=true}
+ 
+ const ni=11,nl=leaveAt(ni); 
+ if(ni>=0)for(let d=0;d<7;d++)if(d!==nl && leaves[ni][d]!=="Y"){plan[ni][d]=S.C;locked[ni][d]=true}
 }
+
 function validateLeaves(){
  const errs=[];
- for(let i=0;i<12;i++)if(leaveAt(i)===null)errs.push(people[i].name+" için izin girilmedi.");
- if(leaveAt(12)!==null)errs.push("PT için izin otomatik seçilir; PT izinini elle girme.");
+ for(let i=0;i<12;i++){
+    const yillikSayisi = leaves[i].filter(v=>v==="Y").length;
+    if(yillikSayisi < 6 && leaveAt(i)===null) errs.push(people[i].name+" için haftalık izin (Kırmızı) seçilmedi.");
+ }
+ if(leaves[12].includes("L")) errs.push("PT için normal izin elle girilmez, sistem çözer (Sadece Yıllık İzin girebilirsiniz).");
  return errs;
 }
+
 function fixedBaseFor(ptLeave){
  const p=people.map(()=>Array(7).fill(""));
  for(let i=0;i<people.length;i++){
-  const ld=i===12?ptLeave:leaveAt(i);
-  if(ld!==null){p[i][ld]=S.L}
+  for(let d=0;d<7;d++){
+   if(leaves[i][d] === "L") p[i][d] = S.L;
+   if(leaves[i][d] === "Y") p[i][d] = S.Y;
+  }
+  if(i===12 && ptLeave!==null) p[12][ptLeave] = S.L;
  }
+ 
  for(let i=0;i<people.length;i++)if(isCycleEligible(i)){
   const ld=leaveAt(i); if(ld!==null)for(const [d,v] of [[(ld+5)%7,S.MID],[(ld+6)%7,S.M],[ld,S.L],[(ld+1)%7,S.C]])p[i][d]=v;
  }
- const ri=9,rl=leaveAt(ri); for(let d=0;d<7;d++)if(d!==rl)p[ri][d]=S.M;
- const ni=11,nl=leaveAt(ni); for(let d=0;d<7;d++)if(d!==nl)p[ni][d]=S.C;
- // Resolve 13:30 forced collisions deterministically: first stays 13:30, later ones become 10:00.
+ const ri=9,rl=leaveAt(ri); for(let d=0;d<7;d++)if(d!==rl && leaves[ri][d]!=="Y")p[ri][d]=S.M;
+ const ni=11,nl=leaveAt(ni); for(let d=0;d<7;d++)if(d!==nl && leaves[ni][d]!=="Y")p[ni][d]=S.C;
+ 
  for(let d=0;d<7;d++){
   const mids=[]; for(let i=0;i<13;i++)if(p[i][d]===S.MID)mids.push(i);
   for(let k=1;k<mids.length;k++)p[mids[k]][d]=S.TEN;
  }
  return p;
 }
-function allowed(p,i,d,s,q){
- if(p[i][d]!=="")return false;
- if(count(p,i)>=q[i])return false;
- // no closing -> next-day work, including the weekly boundary
- const prev=(d+6)%7;
- if(i!==11 && p[i][prev]===S.C)return false;
- const k=people[i].kind;
- if(k==="morning"&&s!==S.M)return false;
- if(k==="cleaning"&&s!==S.C)return false;
- return true;
-}
-function solveOne(ptLeave, shortIdx=null){
+
+function solveOne(ptLeave){
  const p=fixedBaseFor(ptLeave);
- const q=people.map((x,i)=>i===12?(shortIdx===null?4:5):(i===shortIdx?5:6));
+ 
+ const q=people.map((x,i)=>{
+    let yillikSayisi = leaves[i].filter(v=>v==="Y").length;
+    let baseQuota = (i===12) ? 4 : 6;
+    return Math.max(0, baseQuota - yillikSayisi);
+ });
+
  if(ptLeave===4)return null;
- // Build only the missing daily slots. Fixed/mandatory assignments are never re-filled.
+
+ // Kapasite hesabı (Naide hariç operasyon ekibi kotaları toplamı)
+ let totalOpCap = 0;
+ for(let i=0;i<13;i++) if(i!==11) totalOpCap += q[i];
+
+ if (totalOpCap < 63) {
+    window._solveError = "Yıllık izinler sebebiyle personel sayısı ana vardiyaları (Sabah 4, Akşam 4, Ara 1) kurmaya yetmiyor.";
+    return null;
+ }
+
+ // Dinamik 10:00 vardiyası dağıtımı (Eldeki fazla mesaileri sevkiyat günleri öncelikli 10:00'a çevir)
+ let extra = totalOpCap - 63;
+ let targetTen = [0,0,0,0,0,0,0];
+ let targetC = [4,4,4,4,4,4,4];
+ 
+ let extraAssigned = 0;
+ for(let d=0;d<7;d++){
+    let forcedTen = daily(p,d,S.TEN);
+    if(forcedTen > 0){
+       targetTen[d] = forcedTen;
+       extraAssigned += forcedTen;
+    }
+ }
+ 
+ let remainingExtra = extra - extraAssigned;
+ if(remainingExtra < 0) {
+    window._solveError = "İzin döngüleri, sistemin kotasından daha fazla 10:00 vardiyası üretti.";
+    return null; 
+ }
+
+ // Sevkiyat günleri öncelikli sıralama (Perşembe, Cumartesi, Pzt, Salı, Çarşamba, Cuma, Pazar)
+ const prio = [3, 5, 0, 1, 2, 4, 6];
+ for(let d of prio){
+     if(remainingExtra > 0 && targetTen[d] === 0){
+         targetTen[d] = 1;
+         remainingExtra--;
+     }
+ }
+ // Hala fazla kota kalırsa kapanış vardiyasına (4'ün üzerine) ekle
+ while(remainingExtra > 0){
+     for(let d of prio){
+         if(remainingExtra > 0){
+             targetC[d]++;
+             remainingExtra--;
+         }
+     }
+ }
+
  const need=[];
  for(let d=0;d<7;d++){
    const m=Math.max(0,4-daily(p,d,S.M));
    const mid=Math.max(0,1-daily(p,d,S.MID));
-   const c=Math.max(0,5-(daily(p,d,S.C)-(p[11][d]===S.C?1:0)));
+   const c=Math.max(0,targetC[d]-(daily(p,d,S.C)-(p[11][d]===S.C?1:0)));
+   const ten=Math.max(0,targetTen[d]-daily(p,d,S.TEN));
+   
    for(let k=0;k<m;k++)need.push({d,s:S.M});
    for(let k=0;k<mid;k++)need.push({d,s:S.MID});
    for(let k=0;k<c;k++)need.push({d,s:S.C});
+   for(let k=0;k<ten;k++)need.push({d,s:S.TEN});
  }
- // If a mandatory base already exceeds a daily requirement, this branch is impossible.
+
  for(let d=0;d<7;d++){
-   if(daily(p,d,S.M)>4 || daily(p,d,S.MID)>1 || (daily(p,d,S.C)-(p[11][d]===S.C?1:0))>5)return null;
+   if(daily(p,d,S.M)>4 || daily(p,d,S.MID)>1 || (daily(p,d,S.C)-(p[11][d]===S.C?1:0))>targetC[d] || daily(p,d,S.TEN)>targetTen[d])return null;
  }
+
  let nodes=0;
  const maxNodes=5000000;
  function canTake(i,d,s){
@@ -134,42 +196,39 @@ function solveOne(ptLeave, shortIdx=null){
    const k=people[i].kind;
    if(k==='morning'&&s!==S.M)return false;
    if(k==='cleaning'&&s!==S.C)return false;
+   
    const prev=(d+6)%7;
-   // Normal employees/managers/PT: closing may not be followed by morning or leave.
-   if(i!==9 && i!==11 && p[i][prev]===S.C && (s===S.M||s===S.L))return false;
-   // Respect fixed next-day leave restriction in both directions.
-   if(i!==9 && i!==11 && p[i][d]===S.L)return false;
-   // PT must work Friday.
-   if(i===12 && d===4 && s===S.L)return false;
+   if(s===S.M && i!==9 && i!==11 && p[i][prev]===S.C) return false;
+   
+   const next=(d+1)%7;
+   if(s===S.C && i!==9 && i!==11 && (p[i][next]===S.M || p[i][next]===S.L || p[i][next]===S.Y)) return false;
+   
    return true;
  }
+
  function candidateList(d,s){
    let arr=[];
    for(let i=0;i<13;i++)if(canTake(i,d,s))arr.push(i);
-   // Preserve fairness and make it easier to complete exact quotas.
    arr.sort((a,b)=>{
      const ra=q[a]-count(p,a), rb=q[b]-count(p,b);
-     // PT Friday first.
      if(d===4&&a===12&&b!==12)return -100;
      if(d===4&&b===12&&a!==12)return 100;
-     // Managers are preferred when a main shift still lacks one.
      const needMgr=(s===S.M||s===S.C)&&!managerOn(p,d,s);
      if(needMgr){
        const am=people[a].kind==='manager', bm=people[b].kind==='manager';
        if(am!==bm)return am?-50:50;
      }
-     // Prefer people with more remaining quota, but penalize consecutive same shift patterns.
      let sa=ra, sb=rb;
      const prev=(d+6)%7;
      if(p[a][prev]===s)sa+=0.25;
      if(p[b][prev]===s)sb+=0.25;
-     if(s===S.C&&(d===3||d===5)){if(people[a].ship)sa+=1;if(people[b].ship)sb+=1}
+     if((s===S.C||s===S.TEN||s===S.MID)&&(d===3||d===5)){if(people[a].ship)sa+=1;if(people[b].ship)sb+=1}
      return sb-sa;
    });
    return arr;
  }
+
  function feasibleRemaining(){
-   // Every worker must still be able to reach their quota with currently open days.
    for(let i=0;i<13;i++){
      const rem=q[i]-count(p,i); if(rem<0)return false;
      let open=0; for(let d=0;d<7;d++)if(p[i][d]==='')open++;
@@ -177,6 +236,7 @@ function solveOne(ptLeave, shortIdx=null){
    }
    return true;
  }
+
  function dfs(done){
    if(++nodes>maxNodes)return false;
    if(done===need.length){
@@ -185,7 +245,6 @@ function solveOne(ptLeave, shortIdx=null){
      for(let d=0;d<7;d++)if(!managerOn(p,d,S.M)||!managerOn(p,d,S.C))return false;
      return true;
    }
-   // Choose the most constrained remaining slot, not the original arbitrary order.
    let best=-1,bestC=null;
    for(let j=done;j<need.length;j++){
      const {d,s}=need[j]; const c=candidateList(d,s);
@@ -204,99 +263,122 @@ function solveOne(ptLeave, shortIdx=null){
  }
  return dfs(0)?p:null;
 }
+
 function solve(){
  const errs=validateLeaves(); if(errs.length){window._solveError=errs.join(" ");return null}
- window._solveError=""; window._fallbackIdx=null; window._fallbackNote="";
- // PT Friday is fixed as a workday. First try normal quotas; then allow PT one extra day,
- // which is the smallest exception needed when a 13:30 collision creates an extra 10:00 slot.
+ window._solveError=""; 
+ 
  const ptOptions=[0,1,2,3,5,6];
- for(const d of ptOptions){const r=solveOne(d,null);if(r)return r}
- // Controlled fallback: PT works 5 days; regular staff remain at 6 days.
- for(const d of ptOptions){const r=solveOne(d,12);if(r){window._fallbackIdx=12;window._fallbackNote="PT 5 gün çalıştı; 10:00 çakışması için sistem tarafından ek gün verildi.";return r}}
- // Last resort: one regular can have 5 days while PT has 5, preserving all hard operational rules.
- for(const shortIdx of [0,1,2,3,4,5,6,7,8,10]){
-   for(const d of ptOptions){const r=solveOne(d,shortIdx);if(r){window._fallbackIdx=shortIdx;window._fallbackNote=people[shortIdx].name+" 5 gün / PT 5 gün olarak dengelendi.";return r}}
+ for(const d of ptOptions){
+    const r=solveOne(d);
+    if(r) return r;
  }
- window._solveError="Bu izinlerle vardiya geçişleri ve günlük kadro kuralları birlikte çözülemedi.";return null;
+ 
+ window._solveError="Bu izinlerle personellerin 'Kesin 6 Gün' (PT 4 Gün) kotası matematiksel olarak sağlanamıyor. İzinlerin yerini değiştirin.";
+ return null;
 }
+
 function setLeave(i,d){
- if(i===12){toast("PT'nin izin günü sistem tarafından otomatik seçilir.");return}
- const old=leaveAt(i); if(old===d)return;
- if(old!==null)leaves[i][old]=false; leaves[i][d]=true;
+ if(i===12){toast("PT'nin normal izni sistem tarafından seçilir. Sadece Yıllık İzin girebilirsiniz.");}
+ const current = leaves[i][d];
+ if(current === ""){
+    const hasNormal = leaves[i].includes("L");
+    leaves[i][d] = hasNormal ? "Y" : "L";
+ } else if (current === "L") {
+    leaves[i][d] = "Y";
+ } else {
+    leaves[i][d] = "";
+ }
  generated=false; buildLockedBase(); render();
 }
+
 function renderPeople(){
  const box=document.getElementById("peopleGrid");
  box.innerHTML=people.map((x,i)=>{
-  const ld=leaveAt(i);
-  return `<div class="person"><div class="personTop"><div><div class="personName">${x.name}</div><div class="personRole">${x.role}</div></div><span class="personTag">${i===12?'Otomatik izin':'İzin seç'}</span></div><div class="dayRow">${DAYS.map((d,di)=>`<button class="dayBtn ${ld===di?'selected':''} ${i===12?'disabled':''}" ${i===12?'disabled':''} onclick="setLeave(${i},${di})"><b>${d}</b>${ld===di?'İZİN':'—'}</button>`).join('')}</div></div>`;
+  return `<div class="person"><div class="personTop"><div><div class="personName">${x.name}</div><div class="personRole">${x.role}</div></div><span class="personTag">${i===12?'Otomatik izin':'İzin seç'}</span></div><div class="dayRow">${DAYS.map((d,di)=>{
+      const stat = leaves[i][di];
+      const cls = stat === "L" ? "selected" : stat === "Y" ? "annual" : "";
+      const text = stat === "L" ? "İZİN" : stat === "Y" ? "YILLIK" : "—";
+      return `<button class="dayBtn ${cls}" onclick="setLeave(${i},${di})"><b>${d}</b>${text}</button>`;
+  }).join('')}</div></div>`;
  }).join('');
 }
+
 function renderPlan(){
  const box=document.getElementById('planView');
  if(!generated){box.className='planView empty';box.innerHTML='⚡ <b>Plan henüz oluşturulmadı</b><span>İzinleri seçip “Planı Oluştur”a bas.</span>';return;}
  box.className='planView';
- box.innerHTML=people.map((x,i)=>`<div class="planPerson"><div class="planPersonHead"><b>${x.name}</b><small>${x.role}</small></div><div class="shiftRow">${DAYS.map((d,di)=>{const v=plan[i][di]||'—';const cls=v===S.L?'leave':v===S.TEN?'ten':isWork(v)?'work':'';return `<div class="shiftCell ${cls}">${v}<small>${d}</small></div>`}).join('')}</div></div>`).join('');
+ box.innerHTML=people.map((x,i)=>`<div class="planPerson"><div class="planPersonHead"><b>${x.name}</b><small>${x.role}</small></div><div class="shiftRow">${DAYS.map((d,di)=>{
+     const v=plan[i][di]||'—';
+     const cls=v===S.L?'leave':v===S.Y?'annualCell':v===S.TEN?'ten':isWork(v)?'work':'';
+     return `<div class="shiftCell ${cls}">${v}<small>${d}</small></div>`
+ }).join('')}</div></div>`).join('');
 }
+
 function render(){
  renderPeople(); renderPlan();
  const e=generated?validatePlan():validateLeaves();
- document.getElementById('status').textContent=e.length?(generated?'⚠ Kontrol gerekli':`⚠ ${e.length} izin eksik`):generated?'✓ Plan hazır':'İzinleri bekliyor';
+ document.getElementById('status').textContent=e.length?(generated?'⚠ Kontrol gerekli':`⚠ ${e.length} eksik / hata`):generated?'✓ Plan hazır':'İzinleri bekliyor';
  document.getElementById('status').className='heroBadge '+(e.length?'bad':'');
  document.getElementById('resultSub').textContent=generated?(e.length?'Kurallarda sorun var':'Tüm kurallar kontrol edildi'):'Plan oluşturulunca burada görünecek';
  document.getElementById('rules').innerHTML=[
- 'Sen yalnızca izin günlerini seçersin; vardiyalara elle müdahale yok.',
- 'İzinler sabittir; sistem izin günlerini değiştirmez.',
+ 'Personel kesin 6, PT kesin 4 gün çalışır.',
+ 'Hücreye arka arkaya tıklayarak Normal İzin (Kırmızı) ve Yıllık İzin (Mavi) seçilebilir. Yıllık İzinler kotadan düşer.',
  'Normal çalışanlarda izin çevrimi zorunlu: 13:30 → 07:30 → İZİN → 16:00.',
- '13:30 aynı gün iki kişiye denk gelirse biri otomatik 10:00 olur.',
- '16:00 → ertesi gün 07:30 ve İZİN kesinlikle yasak (Reyyan/Naide hariç).',
- 'Reyyan: izin hariç her gün 07:30.',
- 'Naide: izin hariç her gün 16:00.',
- 'Sabah 4, 13:30 en az 1, akşam en az 5 operasyon + Naide.',
- 'Her ana vardiyada en az 1 yönetici.',
- 'PT Cuma kesin çalışır; gerekirse sistem PT ve bir kişiyi 5 güne çıkararak toplamı dengeler.',
- 'Sevkiyat günlerinde uygun personel önceliklendirilir.'
+ 'Personel kotalarını dengelemek için 10:00 vardiyası (öncelik sevkiyat günleri) dinamik eklenir.',
+ '16:00 → ertesi gün 07:30 ve İZİN (Yıllık dahil) kesinlikle yasak (Reyyan/Naide hariç).',
+ 'Sabah 4, 13:30 en az 1, akşam en az 4 operasyon + Naide.',
+ 'Her ana vardiyada en az 1 yönetici.'
  ].map(x=>`<div class="rule ok">✓ ${x}</div>`).join('');
  document.getElementById('days').innerHTML=generated?DAYS.map((d,di)=>`<span class="pill"><b>${d}</b> · ${daily(plan,di,S.M)} sabah · ${daily(plan,di,S.MID)} orta · ${daily(plan,di,S.TEN)} 10 · ${daily(plan,di,S.C)} kapanış</span>`).join(''):'';
  if(generated&&e.length)document.getElementById('resultSub').textContent=e.slice(0,3).join(' · ');
 }
+
 function validatePlan(){
  let e=[];
  for(let d=0;d<7;d++){
   if(daily(plan,d,S.M)!==4)e.push(`${DAYS[d]} sabah ${daily(plan,d,S.M)}/4`);
   if(daily(plan,d,S.MID)!==1)e.push(`${DAYS[d]} 13:30 ${daily(plan,d,S.MID)}/1`);
-  let ops=daily(plan,d,S.M)+daily(plan,d,S.TEN)+daily(plan,d,S.MID)+daily(plan,d,S.C)-(plan[11][d]===S.C?1:0);
-  if(ops!==10)e.push(`${DAYS[d]} operasyon ${ops}/10`);
-  if(d!==leaveAt(11)&&plan[11][d]!==S.C)e.push(`${DAYS[d]} Naide 16:00 değil`);
-  if(d!==leaveAt(9)&&plan[9][d]!==S.M)e.push(`${DAYS[d]} Reyyan 07:30 değil`);
+  let opsC=daily(plan,d,S.C)-(plan[11][d]===S.C?1:0);
+  if(opsC < 4)e.push(`${DAYS[d]} kapanış ${opsC}/4 (min 4 olmalı)`);
+  if(d!==leaveAt(11)&&plan[11][d]!==S.C&&plan[11][d]!==S.Y)e.push(`${DAYS[d]} Naide 16:00 değil`);
+  if(d!==leaveAt(9)&&plan[9][d]!==S.M&&plan[9][d]!==S.Y)e.push(`${DAYS[d]} Reyyan 07:30 değil`);
   if(!managerOn(plan,d,S.M)||!managerOn(plan,d,S.C))e.push(`${DAYS[d]} yönetici eksik`);
  }
  for(let i=0;i<13;i++)if(i!==11)for(let d=0;d<7;d++){
   const next=(d+1)%7;
-  if(plan[i][d]===S.C && (plan[i][next]===S.M || plan[i][next]===S.L))e.push(`${people[i].name}: 16:00→${plan[i][next]} yasak`);
+  if(plan[i][d]===S.C && (plan[i][next]===S.M || plan[i][next]===S.L || plan[i][next]===S.Y))e.push(`${people[i].name}: 16:00→${plan[i][next]} yasak`);
  }
  for(let i=0;i<12;i++){
   const ld=leaveAt(i); if(ld===null)continue;
   if(isCycleEligible(i)){
    const a=(ld+5)%7,b=(ld+6)%7,f=(ld+1)%7;
-   if(plan[i][b]!==S.M)e.push(`${people[i].name}: izin öncesi 07:30 ihlali`);
-   if(plan[i][f]!==S.C)e.push(`${people[i].name}: izin sonrası 16:00 ihlali`);
-   if(plan[i][a]!==S.MID&&plan[i][a]!==S.TEN)e.push(`${people[i].name}: izin -2 13:30/10 ihlali`);
+   if(plan[i][b]!==S.M && plan[i][b]!==S.Y)e.push(`${people[i].name}: izin öncesi 07:30 ihlali`);
+   if(plan[i][f]!==S.C && plan[i][f]!==S.Y)e.push(`${people[i].name}: izin sonrası 16:00 ihlali`);
+   if(plan[i][a]!==S.MID&&plan[i][a]!==S.TEN&&plan[i][a]!==S.Y)e.push(`${people[i].name}: izin -2 13:30/10 ihlali`);
   }
   if(plan[i][ld]!==S.L)e.push(`${people[i].name}: izin günü ihlali`);
  }
- if(!isWork(plan[12][4]))e.push('PT Cuma çalışmıyor');
+ if(!isWork(plan[12][4]) && plan[12][4]!==S.Y)e.push('PT Cuma çalışmıyor');
  for(let i=0;i<13;i++)if(count(plan,i)!==activeQuota[i])e.push(`${people[i].name}: ${count(plan,i)}/${activeQuota[i]} gün`);
  return [...new Set(e)];
 }
+
 function doSolve(){
  toast('İzinlere göre plan hesaplanıyor…');
  setTimeout(()=>{
   const r=solve();
   if(!r){generated=false;buildLockedBase();render();document.getElementById('status').textContent='⚠ Çözüm bulunamadı';toast(window._solveError||'Bu izinlerle kuralların tamamı aynı anda karşılanamıyor.');return;}
-  plan=r; activeQuota=people.map((x,i)=>i===12?(window._fallbackNote?5:4):(window._fallbackNote&&i===window._fallbackIdx?5:6)); generated=true;locked=people.map((x,i)=>plan[i].map(v=>v!==''));render();toast('✓ Plan otomatik oluşturuldu');
+  plan=r; 
+  activeQuota=people.map((x,i)=>{
+    let yillikSayisi = leaves[i].filter(v=>v==="Y").length;
+    let baseQuota = (i===12) ? 4 : 6;
+    return Math.max(0, baseQuota - yillikSayisi);
+  });
+  generated=true;locked=people.map((x,i)=>plan[i].map(v=>v!==''));render();toast('✓ Plan otomatik oluşturuldu');
  },40);
 }
+
 document.getElementById('make').onclick=doSolve;document.getElementById('makeBottom').onclick=doSolve;document.getElementById('clear').onclick=resetLeaves;
 resetLeaves();
 </script>
